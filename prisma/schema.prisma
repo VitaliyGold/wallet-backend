@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ExpensesData {
+  expenses_id String @id @unique @default(uuid())
+  tags TagExpenseLinks[]
+  amount Float
+  date DateTime
+  category CategoryExpenseLinks[]
+  name String
+}
+
+model TagExpenseLinks {
+    Expense ExpensesData @relation(fields: expenses_id, references: expenses_id)
+    Tag TagData @relation(fields: tag_id, references: tag_id)
+    expenses_id String
+    tag_id String
+
+    @@unique([expenses_id, tag_id])
+}
+
+model CategoryExpenseLinks {
+    Expense ExpensesData @relation(fields: expenses_id, references: expenses_id)
+    Category CategoryData @relation(fields: category_id, references: category_id)
+    expenses_id String
+    category_id String
+
+    @@unique([expenses_id, category_id])
+}
+
+model TagData {
+    tag_id String @id @unique @default(uuid())
+    name String @unique
+    ExpenseLinks TagExpenseLinks[]
+}
+
+model CategoryData {
+    category_id String @id @unique @default(uuid())
+    name String @unique
+    ExpenseLinks CategoryExpenseLinks[]
+}

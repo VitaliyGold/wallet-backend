@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres
+    container_name: bd
+    env_file:
+      - ./.env
+    volumes:
+      - ./deploy/db:/docker-entrypoint-initdb.d
+      - ./diskdb-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

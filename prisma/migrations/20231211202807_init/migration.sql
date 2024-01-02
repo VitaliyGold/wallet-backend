@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ExpensesData" ALTER COLUMN "date" SET DATA TYPE TIMESTAMP(3);

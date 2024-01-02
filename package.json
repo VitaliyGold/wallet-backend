@@ -1,0 +1,27 @@
+{
+  "name": "student_disk_backend",
+  "version": "0.0.1",
+  "main": "server.ts",
+  "author": "Vitaliy",
+  "license": "MIT",
+  "scripts": {
+    "build:ts": "tsc",
+    "dev": "nodemon src/server.ts",
+    "migrations": "npx prisma migrate dev --name init"
+  },
+  "dependencies": {
+    "@fastify/autoload": "^5.7.1",
+    "@fastify/cors": "^8.3.0",
+    "@prisma/client": "^4.16.2",
+    "dotenv": "16.3.1",
+    "fastify": "^4.19.1",
+    "fastify-plugin": "^4.5.0",
+    "nodemon": "^3.0.1",
+    "prisma": "^4.16.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.3"
+  }
+}
