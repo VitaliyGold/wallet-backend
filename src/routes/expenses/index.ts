@@ -1,7 +1,7 @@
 import { FastifyPluginAsync, FastifyReply } from "fastify";
 
-import { ExpensesController, ExpensesCategoriesController } from "../../modules/expenses";
-import { GetExpensesRequest, CreateExpensesRequest, DeleteExpenseRequest, PatchExpenseRequest, AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest } from '../../modules/expenses';
+import { ExpensesController, ExpensesCategoriesController, ExpensesTagsController} from "../../modules/expenses";
+import type { GetExpensesRequest, CreateExpensesRequest, DeleteExpenseRequest, PatchExpenseRequest, AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest, AddTagForExpenseRequest, RemoveTagForExpenseRequest } from '../../modules/expenses';
 
 const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get('/', {}, (req: GetExpensesRequest, reply: FastifyReply) => {
@@ -20,12 +20,24 @@ const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
     return ExpensesController.patchExpense(req, reply);
   });
 
+
+  // добавление категорий к тратам
   fastify.post('/:expenses_id/category', {}, (req: AddCategoryForExpenseRequest, reply: FastifyReply) => {
     return ExpensesCategoriesController.addCategoryForExpense(req, reply);
   });
 
   fastify.delete('/:expenses_id/category', {}, (req: RemoveCategoryForExpenseRequest, reply: FastifyReply) => {
     return ExpensesCategoriesController.removeCategoryFromExpense(req, reply);
+  })
+
+
+  // добавление тегов к тратам
+  fastify.post('/:expenses_id/tag', {}, (req: AddTagForExpenseRequest, reply: FastifyReply) => {
+    return ExpensesTagsController.addTagForExpense(req, reply);
+  });
+
+  fastify.delete('/:expenses_id/tag', {}, (req: RemoveTagForExpenseRequest, reply: FastifyReply) => {
+    return ExpensesTagsController.removeTagFromExpense(req, reply);
   })
 }
 

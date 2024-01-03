@@ -3,7 +3,6 @@ import { ExpensesCategoriesRepository } from "./expenses.category.repository";
 
 class Service {
     async addCategoryToExpense(expense_id: string, category_id: string, reply: FastifyReply) {
-        console.log(expense_id, category_id)
         const createdCategory = await ExpensesCategoriesRepository.addCategoryToExpense(expense_id, category_id);
 
         reply.send(createdCategory)
