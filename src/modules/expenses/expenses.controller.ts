@@ -2,11 +2,11 @@ import type { FastifyReply } from 'fastify';
 
 import { ExpenseService } from './expenses.service';
 import { GetExpensesRequest, CreateExpensesRequest, DeleteExpenseRequest, PatchExpenseRequest } from './expenses.types';
-import { createPagination } from './expenses.mappers';
+import { createParamsPagination } from './expenses.mappers';
 
 class Controller {
 	getExpenses(req: GetExpensesRequest, reply: FastifyReply) {
-        const paginationParams = createPagination(req.query);
+        const paginationParams = createParamsPagination(req.query);
         return ExpenseService.getExpenses(paginationParams, reply);
     }
 

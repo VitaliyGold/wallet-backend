@@ -1,6 +1,6 @@
 import { GetExpensesQuery } from './expenses.types';
 
-const createPagination = (query: GetExpensesQuery): Required<GetExpensesQuery> => {
+const createParamsPagination = (query: GetExpensesQuery): Required<GetExpensesQuery> => {
     return {
         name: String(query.name) ?? '',
         limit: Number(query.limit) ?? 50,
@@ -11,6 +11,14 @@ const createPagination = (query: GetExpensesQuery): Required<GetExpensesQuery> =
     }
 }
 
+const createResponsePagination = <T>(data: T, total: number) => {
+    return {
+        data,
+        total,
+    }
+}
+
 export {
-    createPagination,
+    createParamsPagination,
+    createResponsePagination,
 }
