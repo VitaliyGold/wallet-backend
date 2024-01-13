@@ -37,6 +37,7 @@ class Repository {
                         contains: params.name,
                     },
                 },
+                
                 select: {
                     expenses_id: true,
                     amount: true,
@@ -52,6 +53,9 @@ class Repository {
                             tag_id: true
                         }
                     }
+                },
+                orderBy: {
+                    date: 'desc'
                 },
                 take: params.limit,
                 skip: params.offset,
