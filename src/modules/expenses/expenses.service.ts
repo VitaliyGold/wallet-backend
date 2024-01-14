@@ -3,11 +3,12 @@ import { randomUUID } from "node:crypto";
 
 import { GetExpensesQuery, CreateExpenseDto, Expense, ChangeExpenseDto } from "./expenses.types";
 import { ExpenseRepository } from './expenses.repository';
+import { createResponsePagination } from "./expenses.mappers";
 
 class Service {
     async getExpenses(params: Required<GetExpensesQuery>, reply: FastifyReply) {
         const expenses = await ExpenseRepository.getExpenses(params);
-        reply.send(expenses);
+        reply.send(createResponsePagination(expenses[0], expenses[1]));
     }
 
     async deleteExpense(tagId: string, reply: FastifyReply) {

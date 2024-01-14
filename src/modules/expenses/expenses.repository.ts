@@ -30,31 +30,45 @@ class Repository {
     }
 
     getExpenses(params: Required<GetExpensesQuery>) {
-        return InstancePrisma.expensesData.findMany({
-            where: {
-                name: {
-                    contains: params.name,
+        return InstancePrisma.$transaction([
+            InstancePrisma.expensesData.findMany({
+                where: {
+                    name: {
+                        contains: params.name,
+                    },
                 },
-            },
-            select: {
-                expenses_id: true,
-                amount: true,
-                date: true,
-                name: true,
-                category: {
-                    select: {
-                        category_id: true,
+                
+                select: {
+                    expenses_id: true,
+                    amount: true,
+                    date: true,
+                    name: true,
+                    category: {
+                        select: {
+                            category_id: true,
+                        }
+                    },
+                    tags: {
+                        select: {
+                            tag_id: true
+                        }
                     }
                 },
-                tags: {
-                    select: {
-                        tag_id: true
-                    }
-                }
-            },
-            take: params.limit,
-            skip: params.offset,
-        })
+                orderBy: {
+                    date: 'desc'
+                },
+                take: params.limit,
+                skip: params.offset,
+            }),
+            InstancePrisma.expensesData.count({
+                where: {
+                    name: {
+                        contains: params.name,
+                    },
+                },
+            })
+        ])
+        
     }
 
     deleteExpense(expenses_id: string) {
