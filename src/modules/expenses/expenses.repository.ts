@@ -35,7 +35,12 @@ class Repository {
                 where: {
                     name: {
                         contains: params.name,
+                        mode: 'insensitive',
                     },
+                    date: {
+                        lte: params.endDate,
+                        gte: params.startDate,
+                    }
                 },
                 
                 select: {
@@ -64,7 +69,12 @@ class Repository {
                 where: {
                     name: {
                         contains: params.name,
+                        mode: 'insensitive',
                     },
+                    date: {
+                        lte: params.endDate,
+                        gte: params.startDate,
+                    }
                 },
             })
         ])
