@@ -1,11 +1,13 @@
 import type { FastifyRequest } from "fastify";
 
 interface GetExpensesQuery {
-    name?: string;
     limit?: number;
     offset?: number;
-    categories: string[];
-    tags: string[];
+    name?: string;
+    categories?: string[];
+    tags?: string[];
+    startDate?: string;
+    endDate?: string;
 }
 
 interface Expense {

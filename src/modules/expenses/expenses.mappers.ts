@@ -6,8 +6,9 @@ const createParamsPagination = (query: GetExpensesQuery): Required<GetExpensesQu
         limit: Number(query.limit) ?? 50,
         offset: Number(query.offset) ?? 0,
         categories: query.categories ?? [],
-        tags: query.tags ?? []
-
+        tags: query.tags ?? [],
+        startDate: query.startDate ?? new Date(0).toISOString(),
+        endDate: query.endDate ?? new Date().toISOString(),
     }
 }
 
