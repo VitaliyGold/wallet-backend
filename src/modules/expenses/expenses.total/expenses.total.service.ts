@@ -1,7 +1,6 @@
 import { FastifyReply } from "fastify";
 import { ExpensesTotalRepository } from "./expenses.total.repository";
 import type { GetTotalExpensesQuery } from './expenses.total.types';
-import { errorConstructor } from "../../../helpers/errorConstructor";
 
 class Service {
     async getExpensesTotal(params: Required<GetTotalExpensesQuery>, reply: FastifyReply) {
