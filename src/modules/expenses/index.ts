@@ -8,3 +8,7 @@ export type { AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest } fr
 export { ExpensesTagsController} from './expenses.tags';
 
 export type { AddTagForExpenseRequest, RemoveTagForExpenseRequest } from './expenses.tags';
+
+export { ExpensesTotalController } from './expenses.total';
+
+export type { GetTotalExpensesRequest } from './expenses.total';
