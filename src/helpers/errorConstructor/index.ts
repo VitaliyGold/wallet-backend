@@ -1,0 +1,1 @@
+export {errorConstructor} from './errorConstructor'

@@ -1,7 +1,10 @@
 import { FastifyPluginAsync, FastifyReply } from "fastify";
 
-import { ExpensesController, ExpensesCategoriesController, ExpensesTagsController} from "../../modules/expenses";
-import type { GetExpensesRequest, CreateExpensesRequest, DeleteExpenseRequest, PatchExpenseRequest, AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest, AddTagForExpenseRequest, RemoveTagForExpenseRequest } from '../../modules/expenses';
+import { ExpensesController, ExpensesCategoriesController, ExpensesTagsController, ExpensesTotalController } from "../../modules/expenses";
+import type { 
+    GetExpensesRequest, CreateExpensesRequest, DeleteExpenseRequest, PatchExpenseRequest, 
+    AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest, AddTagForExpenseRequest, 
+    RemoveTagForExpenseRequest, GetTotalExpensesRequest } from '../../modules/expenses';
 
 const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get('/', {}, (req: GetExpensesRequest, reply: FastifyReply) => {
@@ -39,6 +42,12 @@ const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.delete('/:expenses_id/tag', {}, (req: RemoveTagForExpenseRequest, reply: FastifyReply) => {
     return ExpensesTagsController.removeTagFromExpense(req, reply);
   })
+
+  // получение total по тратам
+
+  fastify.get('/total', {}, (req: GetTotalExpensesRequest, reply: FastifyReply) => {
+    return ExpensesTotalController.getExpensesTotal(req, reply);
+  });
 }
 
 export default ExpensesRoute;
