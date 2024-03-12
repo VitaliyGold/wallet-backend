@@ -6,7 +6,6 @@ import { ExpensesCategoriesService } from "./expenses.category.service";
 
 class Controller {
     addCategoryForExpense(req: AddCategoryForExpenseRequest, reply: FastifyReply) {
-        console.log(req.params)
         return ExpensesCategoriesService.addCategoryToExpense(req.params.expenses_id, req.query.category_id, reply);
     }
 

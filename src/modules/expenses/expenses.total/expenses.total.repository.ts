@@ -1,5 +1,6 @@
 import { InstancePrisma } from "../../../utils/prismaClient";
 import type { GetTotalExpensesQuery } from './expenses.total.types';
+import { getExpensesFiltersBuilder } from "../expenses.queryBuilder";
 
 class Repository {
     getExpensesTotal(params: Required<GetTotalExpensesQuery>) {
@@ -12,7 +13,8 @@ class Repository {
                 date: {
                     lte: params.endDate,
                     gte: params.startDate,
-                }
+                },
+                ...getExpensesFiltersBuilder(params.categories, params.tags),
             },
             _sum: {
                 amount: true,

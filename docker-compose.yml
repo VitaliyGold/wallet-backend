@@ -3,6 +3,7 @@ services:
   postgres:
     image: postgres
     container_name: bd
+    command: ["postgres",  "-c",  "log_statement=all"]
     env_file:
       - ./.env
     volumes:

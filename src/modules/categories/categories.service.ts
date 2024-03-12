@@ -5,13 +5,13 @@ import { CategoriesRepository } from './categories.repository';
 
 class Service {
     async getCategories(params: Required<GetCategoriesQuery>, reply: FastifyReply) {
-        const category = await CategoriesRepository.getCategories(params.name);
-        reply.send(category);
+        const categories = await CategoriesRepository.getCategories(params.name);
+        reply.send(categories);
     }
 
     async deleteCategory(categoryId: string, reply: FastifyReply) {
-        const removed = await CategoriesRepository.deleteCategory(categoryId);
-        reply.send(removed);
+        const removedCategory = await CategoriesRepository.deleteCategory(categoryId);
+        reply.send(removedCategory);
     }
 
     async patchCategory(tag: Category, reply: FastifyReply) {

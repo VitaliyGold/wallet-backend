@@ -4,7 +4,6 @@ import { CreateTagDto, Tag } from "./tags.types";
 
 class Repository {
     createTag(data: CreateTagDto) {
-        console.log(data)
         return InstancePrisma.tagData.create({
             data,
         });

@@ -1,6 +1,7 @@
 import { InstancePrisma } from "../../utils/prismaClient";
 
 import { Expense, GetExpensesQuery, ChangeExpenseDto } from "./expenses.types";
+import { getExpensesFiltersBuilder } from "./expenses.queryBuilder";
 
 class Repository {
     createExpenses(data: Expense[]) {
@@ -30,6 +31,8 @@ class Repository {
     }
 
     getExpenses(params: Required<GetExpensesQuery>) {
+        
+
         return InstancePrisma.$transaction([
             InstancePrisma.expensesData.findMany({
                 where: {
@@ -40,7 +43,9 @@ class Repository {
                     date: {
                         lte: params.endDate,
                         gte: params.startDate,
-                    }
+                    },
+                    ...getExpensesFiltersBuilder(params.categories, params.tags)
+                    
                 },
                 
                 select: {
@@ -74,7 +79,8 @@ class Repository {
                     date: {
                         lte: params.endDate,
                         gte: params.startDate,
-                    }
+                    },
+                    ...getExpensesFiltersBuilder(params.categories, params.tags)
                 },
             })
         ])
