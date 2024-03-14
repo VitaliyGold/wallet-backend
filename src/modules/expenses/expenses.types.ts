@@ -19,7 +19,6 @@ interface Expense {
     tags: string[]
 }
 
-type ChangeExpenseDto = Omit<Expense, 'categories' | 'tags'>;
 type CreateExpenseDto = Omit<Expense, 'expenses_id'>;
 
 type GetExpensesRequest = FastifyRequest<{ Querystring: GetExpensesQuery }>;

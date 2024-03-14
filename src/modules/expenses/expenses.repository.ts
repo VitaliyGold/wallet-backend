@@ -1,6 +1,6 @@
 import { InstancePrisma } from "../../utils/prismaClient";
 
-import { Expense, GetExpensesQuery, ChangeExpenseDto } from "./expenses.types";
+import { Expense, GetExpensesQuery } from "./expenses.types";
 import { getExpensesFiltersBuilder } from "./expenses.queryBuilder";
 
 class Repository {
@@ -95,20 +95,32 @@ class Repository {
         })
     }
 
-    changeExpense(data: ChangeExpenseDto) {
-        return InstancePrisma.$transaction([
-            InstancePrisma.expensesData.update({
-                where: {
-                    expenses_id: data.expenses_id,
-                },
-                data: {
-                    amount: data.amount,
-                    date: data.date,
-                    name: data.name,
-                }
+    changeExpense(data: Expense) {
+        return InstancePrisma.expensesData.update({
+            where: {
+                expenses_id: data.expenses_id,
             },
-        ),
-    ])
+            data: {
+                amount: data.amount,
+                date: data.date,
+                name: data.name,
+                category: {
+                    deleteMany: {},
+                    createMany: {
+                        data: data.categories.map(category => ({
+                            category_id: category,
+                        }))
+                    }
+                },
+                tags: {
+                    createMany: {
+                        data: data.tags.map(tag => ({
+                            tag_id: tag,
+                        }))
+                    }
+                }
+            }
+        })
     }
 }
 

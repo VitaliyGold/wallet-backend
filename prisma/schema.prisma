@@ -28,7 +28,7 @@ model TagExpenseLinks {
 model CategoryExpenseLinks {
     Expense ExpensesData @relation(fields: expenses_id, references: expenses_id)
     Category CategoryData @relation(fields: category_id, references: category_id)
-    expenses_id String @id
+    expenses_id String
     category_id String
 
     @@unique([expenses_id, category_id])
