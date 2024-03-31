@@ -7,6 +7,7 @@ interface GetCategoriesQuery {
 interface Category {
     category_id: string,
     name: string,
+    color: string,
 }
 
 type CreateCategoryDto = Omit<Category, 'category_id'>;
