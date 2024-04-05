@@ -44,6 +44,6 @@ model TagData {
 model CategoryData {
     category_id String @id @unique @default(uuid())
     name String @unique
-    color String @default("#ffffff")
+    color String @default("#fffff2")
     ExpenseLinks CategoryExpenseLinks[]
 }
