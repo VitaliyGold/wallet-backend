@@ -37,11 +37,13 @@ model CategoryExpenseLinks {
 model TagData {
     tag_id String @id @unique @default(uuid())
     name String @unique
+    color String @default("#ffffff")
     ExpenseLinks TagExpenseLinks[]
 }
 
 model CategoryData {
     category_id String @id @unique @default(uuid())
     name String @unique
+    color String @default("#ffffff")
     ExpenseLinks CategoryExpenseLinks[]
 }
