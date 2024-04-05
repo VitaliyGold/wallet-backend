@@ -1,7 +1,7 @@
 import { FastifyReply } from "fastify";
 import { randomUUID } from "node:crypto";
 
-import { GetExpensesQuery, CreateExpenseDto, Expense, ChangeExpenseDto } from "./expenses.types";
+import { GetExpensesQuery, CreateExpenseDto, Expense, PatchExpenseRequest } from "./expenses.types";
 import { ExpenseRepository } from './expenses.repository';
 import { createResponsePagination } from "./expenses.mappers";
 
@@ -11,13 +11,13 @@ class Service {
         reply.send(createResponsePagination(expenses[0], expenses[1]));
     }
 
-    async deleteExpense(tagId: string, reply: FastifyReply) {
-        const removedExpense = await ExpenseRepository.deleteExpense(tagId);
+    async deleteExpense(expenseId: string, reply: FastifyReply) {
+        const removedExpense = await ExpenseRepository.deleteExpense(expenseId);
         reply.send(removedExpense);
     }
 
-    async patchExpense(tag: ChangeExpenseDto, reply: FastifyReply) {
-        const patchedExpenses = await ExpenseRepository.changeExpense(tag);
+    async patchExpense(expense: Expense, reply: FastifyReply) {
+        const patchedExpenses = await ExpenseRepository.changeExpense(expense);
         reply.send(patchedExpenses);
     }
 

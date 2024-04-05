@@ -1,7 +1,7 @@
 import { InstancePrisma } from "../../utils/prismaClient";
 
 import { Expense, GetExpensesQuery } from "./expenses.types";
-import { getExpensesFiltersBuilder } from "./expenses.queryBuilder";
+import { getExpensesFiltersBuilder, getAmountFilterBilder } from "./expenses.queryBuilder";
 
 class Repository {
     createExpenses(data: Expense[]) {
@@ -44,7 +44,8 @@ class Repository {
                         lte: params.endDate,
                         gte: params.startDate,
                     },
-                    ...getExpensesFiltersBuilder(params.categories, params.tags)
+                    ...getExpensesFiltersBuilder(params.categories, params.tags),
+                    ...getAmountFilterBilder(params.direction),
                     
                 },
                 
@@ -80,7 +81,8 @@ class Repository {
                         lte: params.endDate,
                         gte: params.startDate,
                     },
-                    ...getExpensesFiltersBuilder(params.categories, params.tags)
+                    ...getExpensesFiltersBuilder(params.categories, params.tags),
+                    ...getAmountFilterBilder(params.direction),
                 },
             })
         ])

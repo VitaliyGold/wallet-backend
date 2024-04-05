@@ -8,7 +8,10 @@ interface GetExpensesQuery {
     tags?: string[];
     startDate?: string;
     endDate?: string;
+    direction?: ExpensesDirection;
 }
+
+type ExpensesDirection = 'all' | 'incomes' | 'expenses';
 
 interface Expense {
     expenses_id: string;
@@ -32,8 +35,8 @@ type PatchExpenseRequest = FastifyRequest<{ Body: { data: Expense } }>
 export type {
     GetExpensesQuery,
     CreateExpenseDto,
-    ChangeExpenseDto,
     Expense,
+    ExpensesDirection,
     GetExpensesRequest,
     CreateExpensesRequest,
     DeleteExpenseRequest,
