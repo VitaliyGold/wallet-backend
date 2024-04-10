@@ -10,12 +10,13 @@ const createParamsPagination = (query: GetExpensesQuery): Required<GetExpensesQu
     }
     return {
         name: query.name ? String(query.name) : '',
-        limit: Number(query.limit) ?? 50,
-        offset: Number(query.offset) ?? 0,
+        limit: query.limit !== undefined ? Number(query.limit) : 50,
+        offset: query.offset !== undefined ? Number(query.offset) : 0,
         categories: query.categories ? getArrayFromQuery(query.categories) : [],
         tags: Array.isArray(query.tags) ? query.categories : [],
         startDate: query.startDate ?? new Date(0).toISOString(),
         endDate: query.endDate ?? new Date().toISOString(),
+        direction: query.direction ?? 'all',
     }
 }
 
