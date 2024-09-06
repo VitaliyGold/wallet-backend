@@ -1,9 +1,9 @@
 import { FastifyReply } from "fastify";
 import { ExpensesTotalRepository } from "./expenses.total.repository";
-import type { GetTotalExpensesQuery } from './expenses.total.types';
+import { GetExpensesQuery } from "../expenses.types";
 
 class Service {
-    async getExpensesTotal(params: Required<GetTotalExpensesQuery>, reply: FastifyReply) {
+    async getExpensesTotal(params: Required<GetExpensesQuery>, reply: FastifyReply) {
         const expensesTotal = await ExpensesTotalRepository.getExpensesTotal(params);
         reply.send({ total: expensesTotal._sum.amount ?? 0 });
     }

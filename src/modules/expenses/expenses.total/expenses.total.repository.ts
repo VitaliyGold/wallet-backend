@@ -1,9 +1,9 @@
 import { InstancePrisma } from "../../../utils/prismaClient";
-import type { GetTotalExpensesQuery } from './expenses.total.types';
+import { GetExpensesQuery } from "../expenses.types";
 import { getExpensesFiltersBuilder, getAmountFilterBilder } from "../expenses.queryBuilder";
 
 class Repository {
-    getExpensesTotal(params: Required<GetTotalExpensesQuery>) {
+    getExpensesTotal(params: Required<GetExpensesQuery>) {
         return InstancePrisma.expensesData.aggregate({
             where: {
                 name: {

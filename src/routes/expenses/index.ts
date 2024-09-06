@@ -6,6 +6,9 @@ import type {
     AddCategoryForExpenseRequest, RemoveCategoryForExpenseRequest, AddTagForExpenseRequest, 
     RemoveTagForExpenseRequest, GetTotalExpensesRequest } from '../../modules/expenses';
 
+import { ExpensesGroupController } from "../../modules/expenses/expenses.group/expenses.group.controller";
+import type { GetGroupExpensesRequest } from "../../modules/expenses/expenses.group/expenses.group.types";
+
 const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get('/', {}, (req: GetExpensesRequest, reply: FastifyReply) => {
     return ExpensesController.getExpenses(req, reply);
@@ -47,6 +50,12 @@ const ExpensesRoute: FastifyPluginAsync = async (fastify): Promise<void> => {
 
   fastify.get('/total', {}, (req: GetTotalExpensesRequest, reply: FastifyReply) => {
     return ExpensesTotalController.getExpensesTotal(req, reply);
+  });
+
+  // получение трат с группировкой
+
+  fastify.get('/group', {}, (req: GetGroupExpensesRequest, reply: FastifyReply) => {
+    return ExpensesGroupController.getGroupExpenses(req, reply);
   });
 }
 
