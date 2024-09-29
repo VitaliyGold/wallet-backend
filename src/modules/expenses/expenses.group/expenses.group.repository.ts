@@ -4,16 +4,15 @@ import { GetGroupExpensesQuery, GroupedExpenses } from "./expenses.group.types";
 
 class Repository {
     getCategoryWithGroup(params: Required<GetGroupExpensesQuery>): Promise<GroupedExpenses> {
-        console.log(params)
-        // @ts-ignore
         return InstancePrisma.$queryRawUnsafe(`
             SELECT 
-                c.category_id, 
-                json_agg(json_build_object(
-                'expenses_id', e.expenses_id,
-                'amount', e.amount,
-                'date', e.date,
-                'name', e.name
+                c.category_id,
+                SUM(e.amount) AS category_total_amount,
+                    json_agg(json_build_object(
+                    'expenses_id', e.expenses_id,
+                    'amount', e.amount,
+                    'date', e.date,
+                    'name', e.name
                 )) AS expenses
             FROM 
                 "CategoryExpenseLinks" c
