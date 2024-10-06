@@ -1,12 +1,12 @@
 import { FastifyReply } from "fastify";
 import { randomUUID } from "node:crypto";
 
-import { GetExpensesQuery, CreateExpenseDto, Expense, PatchExpenseRequest } from "./expenses.types";
+import { GetPaginationExpensesQuery, CreateExpenseDto, Expense } from "./expenses.types";
 import { ExpenseRepository } from './expenses.repository';
 import { createResponsePagination } from "./expenses.mappers";
 
 class Service {
-    async getExpenses(params: Required<GetExpensesQuery>, reply: FastifyReply) {
+    async getExpenses(params: Required<GetPaginationExpensesQuery>, reply: FastifyReply) {
         const expenses = await ExpenseRepository.getExpenses(params);
         reply.send(createResponsePagination(expenses[0], expenses[1]));
     }

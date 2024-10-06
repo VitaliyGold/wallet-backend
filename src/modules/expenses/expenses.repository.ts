@@ -1,6 +1,6 @@
 import { InstancePrisma } from "../../utils/prismaClient";
 
-import { Expense, GetExpensesQuery } from "./expenses.types";
+import { Expense, GetPaginationExpensesQuery } from "./expenses.types";
 import { getExpensesFiltersBuilder, getAmountFilterBilder } from "./expenses.queryBuilder";
 
 class Repository {
@@ -30,7 +30,7 @@ class Repository {
         )
     }
 
-    getExpenses(params: Required<GetExpensesQuery>) {
+    getExpenses(params: Required<GetPaginationExpensesQuery>) {
         
 
         return InstancePrisma.$transaction([

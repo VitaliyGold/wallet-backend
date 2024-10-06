@@ -1,6 +1,6 @@
 import type { FastifyRequest } from "fastify";
 
-interface GetExpensesQuery {
+interface GetPaginationExpensesQuery {
     limit?: number;
     offset?: number;
     name?: string;
@@ -24,7 +24,7 @@ interface Expense {
 
 type CreateExpenseDto = Omit<Expense, 'expenses_id'>;
 
-type GetExpensesRequest = FastifyRequest<{ Querystring: GetExpensesQuery }>;
+type GetExpensesRequest = FastifyRequest<{ Querystring: GetPaginationExpensesQuery }>;
 
 type CreateExpensesRequest = FastifyRequest<{ Body: { data: CreateExpenseDto[] } }>;
 
@@ -32,7 +32,10 @@ type DeleteExpenseRequest = FastifyRequest<{ Querystring: Pick<Expense, 'expense
 
 type PatchExpenseRequest = FastifyRequest<{ Body: { data: Expense } }>
 
+type GetExpensesQuery = Omit<GetPaginationExpensesQuery, 'limit' | 'offset'>
+
 export type {
+    GetPaginationExpensesQuery,
     GetExpensesQuery,
     CreateExpenseDto,
     Expense,
