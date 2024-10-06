@@ -15,7 +15,7 @@ const getExpensesFiltersBuilder = (categories: string[], tags: string[]) => {
         }
     }
     if (tags.length) {
-        filters['tags'] = {
+        filters['tag'] = {
             some: {
                 tag_id: {
                     in: tags,

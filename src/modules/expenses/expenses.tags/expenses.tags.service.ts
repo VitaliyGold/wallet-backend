@@ -8,8 +8,8 @@ class Service {
         reply.send(createdTag)
     }
 
-    async removeTagFromExpense(expense_id: string, tag_id: string, reply: FastifyReply) {
-        const removedTag = await ExpensesTagsRepository.removeTagFromExpense(expense_id, tag_id);
+    async removeTagFromExpense(expense_id: string, reply: FastifyReply) {
+        const removedTag = await ExpensesTagsRepository.removeTagFromExpense(expense_id);
 
         reply.send(removedTag);
     }

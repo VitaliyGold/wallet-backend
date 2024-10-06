@@ -2,21 +2,23 @@ import { InstancePrisma } from "../../../utils/prismaClient";
 
 class Repository {
     addCategoryToExpense(expenses_id: string, category_id: string) {
-        return InstancePrisma.categoryExpenseLinks.create({
-            data: {
+        return InstancePrisma.expensesData.update({
+            where: {
                 expenses_id,
+            },
+            data: {
                 category_id,
             }
         })
     }
 
-    removeCategoryFromExpense(expenses_id: string, category_id: string) {
-        return InstancePrisma.categoryExpenseLinks.delete({
+    removeCategoryFromExpense(expenses_id: string) {
+        return InstancePrisma.expensesData.update({
             where: {
-                expenses_id_category_id: {
-                    expenses_id,
-                    category_id,
-                }
+                expenses_id,
+            },
+            data: {
+                category_id: null,
             }
         })
     }

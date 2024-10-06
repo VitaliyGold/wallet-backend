@@ -18,8 +18,8 @@ interface Expense {
     amount: number,
     date: string,
     name: string,
-    categories: string[],
-    tags: string[]
+    category_id: string | null,
+    tag_id: string | null,
 }
 
 type CreateExpenseDto = Omit<Expense, 'expenses_id'>;

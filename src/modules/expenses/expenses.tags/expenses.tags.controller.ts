@@ -11,7 +11,7 @@ class Controller {
 
     removeTagFromExpense(req: RemoveTagForExpenseRequest, reply: FastifyReply) {
         
-        return ExpensesTagsService.removeTagFromExpense(req.params.expenses_id, req.query.tag_id, reply);
+        return ExpensesTagsService.removeTagFromExpense(req.params.expenses_id, reply);
     }
 };
 

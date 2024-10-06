@@ -11,20 +11,8 @@ class Repository {
                 name: expense.name,
                 date: expense.date,
                 expenses_id: expense.expenses_id,
-                category: {
-                    createMany: {
-                        data: expense.categories.map(category => ({
-                            category_id: category,
-                        }))
-                    }
-                },
-                tags: {
-                    createMany: {
-                        data: expense.tags.map(tag => ({
-                            tag_id: tag,
-                        }))
-                    }
-                }
+                category_id: expense.category_id,
+                tag_id: expense.tag_id,
             }
         }))
         )
@@ -54,16 +42,8 @@ class Repository {
                     amount: true,
                     date: true,
                     name: true,
-                    category: {
-                        select: {
-                            category_id: true,
-                        }
-                    },
-                    tags: {
-                        select: {
-                            tag_id: true
-                        }
-                    }
+                    category_id: true,
+                    tag_id: true,
                 },
                 orderBy: {
                     date: 'desc'
@@ -106,21 +86,8 @@ class Repository {
                 amount: data.amount,
                 date: data.date,
                 name: data.name,
-                category: {
-                    deleteMany: {},
-                    createMany: {
-                        data: data.categories.map(category => ({
-                            category_id: category,
-                        }))
-                    }
-                },
-                tags: {
-                    createMany: {
-                        data: data.tags.map(tag => ({
-                            tag_id: tag,
-                        }))
-                    }
-                }
+                category_id: data.category_id,
+                tag_id: data.tag_id,
             }
         })
     }

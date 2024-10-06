@@ -11,7 +11,7 @@ class Controller {
 
     removeCategoryFromExpense(req: RemoveCategoryForExpenseRequest, reply: FastifyReply) {
         
-        return ExpensesCategoriesService.removeCategoryFromExpense(req.params.expenses_id, req.query.category_id, reply);
+        return ExpensesCategoriesService.removeCategoryFromExpense(req.params.expenses_id, reply);
     }
 };
 

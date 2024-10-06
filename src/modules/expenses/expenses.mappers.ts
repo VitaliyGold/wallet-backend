@@ -11,7 +11,7 @@ const createGetExpenseParams = (query: GetExpensesQuery): Required<GetExpensesQu
     return {
         name: query.name ? String(query.name) : '',
         categories: query.categories ? getArrayFromQuery(query.categories) : [],
-        tags: Array.isArray(query.tags) ? query.categories : [],
+        tags: Array.isArray(query.tags) ? query.tags : [],
         startDate: query.startDate ?? new Date(0).toISOString(),
         endDate: query.endDate ?? new Date().toISOString(),
         direction: query.direction ?? 'all',
