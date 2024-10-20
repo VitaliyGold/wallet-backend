@@ -2,21 +2,23 @@ import { InstancePrisma } from "../../../utils/prismaClient";
 
 class Repository {
     addTagToExpense(expenses_id: string, tag_id: string) {
-        return InstancePrisma.tagExpenseLinks.create({
-            data: {
+        return InstancePrisma.expensesData.update({
+            where: {
                 expenses_id,
+            },
+            data: {
                 tag_id,
             }
         })
     }
 
-    removeTagFromExpense(expenses_id: string, tag_id: string) {
-        return InstancePrisma.tagExpenseLinks.delete({
+    removeTagFromExpense(expenses_id: string) {
+        return InstancePrisma.expensesData.update({
             where: {
-                expenses_id_tag_id: {
-                    expenses_id,
-                    tag_id,
-                }
+                expenses_id,
+            },
+            data: {
+                category_id: null,
             }
         })
     }

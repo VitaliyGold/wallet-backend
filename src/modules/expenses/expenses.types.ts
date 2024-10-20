@@ -4,7 +4,7 @@ interface GetPaginationExpensesQuery {
     limit?: number;
     offset?: number;
     name?: string;
-    categories?: string[];
+    category_ids?: string[];
     tags?: string[];
     startDate?: string;
     endDate?: string;
@@ -18,8 +18,8 @@ interface Expense {
     amount: number,
     date: string,
     name: string,
-    categories: string[],
-    tags: string[]
+    category_id: string | null,
+    tag_id: string | null,
 }
 
 type CreateExpenseDto = Omit<Expense, 'expenses_id'>;

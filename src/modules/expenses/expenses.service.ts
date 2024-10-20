@@ -22,7 +22,7 @@ class Service {
     }
 
     async addExpenses(data: CreateExpenseDto[], reply: FastifyReply) {
-        const expensesWithIds = data.map<Expense>(expense => ({ ...expense, expenses_id: randomUUID() }))
+        const expensesWithIds = data.map<Expense>(expense => ({ ...expense, expenses_id: randomUUID(), category_id: expense.category_id ?? null, tag_id: expense.tag_id ?? null }))
 
         const createdExpenses = await ExpenseRepository.createExpenses(expensesWithIds);
         reply.status(201).send(createdExpenses);

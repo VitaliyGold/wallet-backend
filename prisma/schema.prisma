@@ -9,41 +9,25 @@ datasource db {
 
 model ExpensesData {
   expenses_id String @id @unique @default(uuid())
-  tags TagExpenseLinks[]
+  tag TagData? @relation(fields: [tag_id], references: [tag_id])
   amount Float
   date DateTime
-  category CategoryExpenseLinks[]
+  category_id String?
+  tag_id String?
+  category CategoryData? @relation(fields: [category_id], references: [category_id])
   name String
-}
-
-model TagExpenseLinks {
-    Expense ExpensesData @relation(fields: expenses_id, references: expenses_id)
-    Tag TagData @relation(fields: tag_id, references: tag_id)
-    expenses_id String
-    tag_id String
-
-    @@unique([expenses_id, tag_id])
-}
-
-model CategoryExpenseLinks {
-    Expense ExpensesData @relation(fields: expenses_id, references: expenses_id)
-    Category CategoryData @relation(fields: category_id, references: category_id)
-    expenses_id String
-    category_id String
-
-    @@unique([expenses_id, category_id])
 }
 
 model TagData {
     tag_id String @id @unique @default(uuid())
     name String @unique
     color String @default("#ffffff")
-    ExpenseLinks TagExpenseLinks[]
+    Expense ExpensesData[]
 }
 
 model CategoryData {
     category_id String @id @unique @default(uuid())
     name String @unique
     color String @default("#ffffff")
-    ExpenseLinks CategoryExpenseLinks[]
+    Expense ExpensesData[]
 }

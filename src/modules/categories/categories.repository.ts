@@ -21,9 +21,12 @@ class Repository {
 
     deleteCategory(category_id: string) {
         return InstancePrisma.$transaction([
-            InstancePrisma.categoryExpenseLinks.deleteMany({
+            InstancePrisma.expensesData.updateMany({
                 where: {
                     category_id,
+                },
+                data: {
+                    category_id: null,
                 }
             }),
             InstancePrisma.categoryData.delete({
