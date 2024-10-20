@@ -4,7 +4,7 @@ interface GetPaginationExpensesQuery {
     limit?: number;
     offset?: number;
     name?: string;
-    categories?: string[];
+    category_ids?: string[];
     tags?: string[];
     startDate?: string;
     endDate?: string;

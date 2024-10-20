@@ -10,7 +10,7 @@ const getArrayFromQuery = (items: string | string[]) => {
 const createGetExpenseParams = (query: GetExpensesQuery): Required<GetExpensesQuery> => {
     return {
         name: query.name ? String(query.name) : '',
-        categories: query.categories ? getArrayFromQuery(query.categories) : [],
+        category_ids: query.category_ids && query.category_ids.length ? getArrayFromQuery(query.category_ids) : [],
         tags: Array.isArray(query.tags) ? query.tags : [],
         startDate: query.startDate ?? new Date(0).toISOString(),
         endDate: query.endDate ?? new Date().toISOString(),

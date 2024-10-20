@@ -2,16 +2,12 @@ import type { ExpensesDirection } from "./expenses.types";
 
 // подумать где лучше хранить подобные функции
 
-const getExpensesFiltersBuilder = (categories: string[], tags: string[]) => {
+const getExpensesFiltersBuilder = (category_ids: string[], tags: string[]) => {
     const filters = {};
 
-    if (categories.length) {
-        filters['category'] = {
-            some: {
-                category_id: {
-                    in: categories,
-                },
-            }
+    if (category_ids.length) {
+        filters['category_id'] = {
+            in: category_ids
         }
     }
     if (tags.length) {

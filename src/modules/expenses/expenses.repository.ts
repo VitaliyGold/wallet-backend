@@ -19,8 +19,6 @@ class Repository {
     }
 
     getExpenses(params: Required<GetPaginationExpensesQuery>) {
-        
-
         return InstancePrisma.$transaction([
             InstancePrisma.expensesData.findMany({
                 where: {
@@ -32,8 +30,8 @@ class Repository {
                         lte: params.endDate,
                         gte: params.startDate,
                     },
-                    ...getExpensesFiltersBuilder(params.categories, params.tags),
-                    ...getAmountFilterBilder(params.direction),
+                    ...getExpensesFiltersBuilder(params.category_ids, params.tags),
+                    ...getAmountFilterBilder(params.direction)
                     
                 },
                 
@@ -61,8 +59,6 @@ class Repository {
                         lte: params.endDate,
                         gte: params.startDate,
                     },
-                    ...getExpensesFiltersBuilder(params.categories, params.tags),
-                    ...getAmountFilterBilder(params.direction),
                 },
             })
         ])
