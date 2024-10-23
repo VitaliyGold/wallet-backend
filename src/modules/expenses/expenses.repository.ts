@@ -59,6 +59,8 @@ class Repository {
                         lte: params.endDate,
                         gte: params.startDate,
                     },
+                    ...getExpensesFiltersBuilder(params.category_ids, params.tags),
+                    ...getAmountFilterBilder(params.direction)
                 },
             })
         ])
